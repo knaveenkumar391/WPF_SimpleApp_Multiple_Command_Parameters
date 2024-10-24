@@ -10,6 +10,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <viewmodel:MainWindowViewModel x:Key="MainVM1"></viewmodel:MainWindowViewModel>
+        <viewmodel:ViewModel2 x:Key="viewmodel2"></viewmodel:ViewModel2>
         <converterClass:MyMultiValuesConverter x:Key="MulValueConverter"></converterClass:MyMultiValuesConverter>
     </Window.Resources>
     
@@ -19,6 +20,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -47,5 +49,6 @@
                 <DataGridTextColumn Header="TeachingSection"  Binding="{Binding TeachingSection}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock Grid.Row="5" DataContext="{StaticResource viewmodel2}" Text="{Binding Counter}"/>
     </Grid>
 </Window>

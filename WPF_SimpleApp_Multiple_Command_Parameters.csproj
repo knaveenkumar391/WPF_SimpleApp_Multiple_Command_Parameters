@@ -73,6 +73,7 @@
     <Compile Include="MVVM\Converters\MyMultiValuesConverter.cs" />
     <Compile Include="MVVM\Model\Teacher.cs" />
     <Compile Include="MVVM\ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\ViewModel2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
