@@ -1,0 +1,4 @@
+﻿The Requirements is 
+1.Sending Multiple Parameters to a Viewmodel using MVVM Pattern & IMultivalueConverter and IvalueConverter
+2.Multiple View models calling in Single View
+3.

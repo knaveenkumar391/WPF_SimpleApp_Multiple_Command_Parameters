@@ -1,0 +1,51 @@
+﻿<Window x:Class="WPF_SimpleApp_Multiple_Command_Parameters.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_SimpleApp_Multiple_Command_Parameters"
+        xmlns:viewmodel="clr-namespace:WPF_SimpleApp_Multiple_Command_Parameters.MVVM.ViewModel"
+        xmlns:converterClass="clr-namespace:WPF_SimpleApp_Multiple_Command_Parameters.MVVM.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <viewmodel:MainWindowViewModel x:Key="MainVM1"></viewmodel:MainWindowViewModel>
+        <converterClass:MyMultiValuesConverter x:Key="MulValueConverter"></converterClass:MyMultiValuesConverter>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Teacher Name" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox x:Name="TextBox1" Text="" Width="280" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="5"/>
+        <TextBlock Text="Teacher Description" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox  x:Name="TextBox2" Text="" Width="280" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5"/>
+        <TextBlock Text="Teaching Section" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox x:Name="TextBox3" Text="" Width="280" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="5"/>
+        <Button Content="Submit" Grid.Row="3" Grid.Column="1" Margin="2" Command="{Binding SubmitCommand}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource MulValueConverter}">
+                    <Binding Path="Text" ElementName="TextBox1"/>
+                    <Binding Path="Text" ElementName="TextBox2"/>
+                    <Binding Path="Text" ElementName="TextBox3"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+        <DataGrid AutoGenerateColumns="False" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding TeacherDetails, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Teacher Name"  Binding="{Binding TeacherName }"/>
+                <DataGridTextColumn Header="Teacher Discription"  Binding="{Binding TeacherDescription}"/>
+                <DataGridTextColumn Header="TeachingSection"  Binding="{Binding TeachingSection}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
